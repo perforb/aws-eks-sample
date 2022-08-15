@@ -24,7 +24,7 @@ resource "aws_security_group" "node_example" {
   name   = "node-example"
   vpc_id = module.vpc.vpc_id
 
-ingress {
+  ingress {
     from_port = 0
     to_port   = 0
     protocol  = "-1"
