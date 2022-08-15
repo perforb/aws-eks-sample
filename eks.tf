@@ -13,8 +13,9 @@ module "eks" {
       min_size                = 1
       max_size                = 1
       instance_types          = ["t3.small"]
-      launch_template_id      = aws_launch_template.eks_example.id
-      launch_template_version = aws_launch_template.eks_example.latest_version
+      create_launch_template  = false
+      launch_template_name    = aws_launch_template.eks_example.name
+      launch_template_version = aws_launch_template.eks_example.default_version
     }
   }
 
@@ -33,6 +34,10 @@ data "aws_eks_cluster_auth" "cluster" {
 }
 
 resource "aws_launch_template" "eks_example" {
+  name_prefix            = "external-eks-"
+  description            = "EKS managed node group external launch template"
+  update_default_version = true
+
   network_interfaces {
     security_groups = [
       module.eks.cluster_primary_security_group_id,
