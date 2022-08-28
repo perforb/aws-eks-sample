@@ -17,7 +17,7 @@ module "iam_assumable_role_with_oidc" {
 resource "kubernetes_service_account" "iam_test" {
   metadata {
     name      = "iam-test"
-    namaspace = "default"
+    namespace = "default"
     annotations = {
       "eks.amazonaws.com/rolearn" = "arn:aws:iam::${data.aws_caller_identity.current.account_id}:role/iamtest"
     }

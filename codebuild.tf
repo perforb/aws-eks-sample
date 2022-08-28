@@ -84,6 +84,7 @@ resource "aws_codestarnotifications_notification_rule" "front_end_build" {
   resource = aws_codebuild_project.front_end_build.arn
 
   target {
-    address = "arn:aws:chatbot::${aws_account_id}:chat-configuration/slack-channel/notification"
+    address = "arn:aws:chatbot::${var.aws_account_id}:chat-configuration/slack-channel/notification"
+    type    = "AWSChatbotSlack"
   }
 }
