@@ -4,18 +4,19 @@ module "eks" {
   cluster_name    = local.cluster_name
   cluster_version = local.cluster_version
   subnet_ids      = module.vpc.public_subnets
-
-  vpc_id = module.vpc.vpc_id
+  vpc_id          = module.vpc.vpc_id
+  enable_irsa     = true
 
   eks_managed_node_groups = {
     green = {
       desired_size            = 1
       min_size                = 1
-      max_size                = 1
+      max_size                = 2
       instance_types          = ["t3.small"]
       create_launch_template  = false
       launch_template_name    = aws_launch_template.eks_example.name
       launch_template_version = aws_launch_template.eks_example.default_version
+      iam_role_arn            = aws_iam_role.eks_node_role.arn
     }
   }
 

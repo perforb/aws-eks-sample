@@ -39,3 +39,5 @@ terraform.rc
 
 # Local package directories
 **/package/*
+
+/kustomize
