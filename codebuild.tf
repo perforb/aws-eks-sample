@@ -15,7 +15,7 @@ resource "aws_codebuild_project" "front_end_build" {
 
   environment {
     compute_type    = "BUILD_GENERAL1_SMALL"
-    image           = "aws/codebuild/amazonlinux2x86_64standard:3.0"
+    image           = "aws/codebuild/amazonlinux2-x86_64-standard:3.0"
     type            = "LINUX_CONTAINER"
     privileged_mode = true
   }
@@ -31,6 +31,12 @@ resource "aws_codebuild_project" "front_end_build" {
       fetch_submodules = false
     }
   }
+}
+
+resource "aws_codebuild_source_credential" "example" {
+  auth_type   = "PERSONAL_ACCESS_TOKEN"
+  server_type = "GITHUB"
+  token       = "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"
 }
 
 resource "aws_codebuild_webhook" "front_end_build" {

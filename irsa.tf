@@ -1,4 +1,4 @@
-module "iam_assumable_role_with_oidc" {
+module "iam_test" {
   source       = "terraform-aws-modules/iam/aws//modules/iam-assumable-role-with-oidc"
   version      = "~> 3.0"
   create_role  = true
@@ -19,9 +19,11 @@ resource "kubernetes_service_account" "iam_test" {
     name      = "iam-test"
     namespace = "default"
     annotations = {
-      "eks.amazonaws.com/rolearn" = "arn:aws:iam::${data.aws_caller_identity.current.account_id}:role/iamtest"
+      "eks.amazonaws.com/role-arn" = "arn:aws:iam::${data.aws_caller_identity.current.account_id}:role/iam-test"
     }
   }
+
+  automount_service_account_token = true
 }
 
 data "aws_caller_identity" "current" {}
