@@ -36,7 +36,7 @@ resource "aws_codebuild_project" "front_end_build" {
 resource "aws_codebuild_source_credential" "example" {
   auth_type   = "PERSONAL_ACCESS_TOKEN"
   server_type = "GITHUB"
-  token       = "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"
+  token       = var.personal_access_token
 }
 
 resource "aws_codebuild_webhook" "front_end_build" {
